@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine!</title>
+    <style>
+        /* DESAIN CSS LANGSUNG DI SINI */
+        body {
+            background-color: #ffc0cb;
+            background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%);
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container { width: 100%; max-width: 400px; color: #d63384; }
+        .hidden { display: none; }
+        .buttons {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            height: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #yesButton { background-color: #ff4d6d; color: white; }
+        #noButton { background-color: white; color: #ff4d6d; }
+        img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 15px;
+            border: 5px solid white;
+            margin-top: 15px;
+        }
+        #flower { width: 150px; border: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="layer1">
+            <h1>Happy Valentine, AMALIA ULYA ANNURHALENA ❤️</h1>
+            <p>Dari sekian banyak manusia di dunia... kok bisa ya aku dapet yang paling lucu, paling gemesin, tapi juga paling bikin kangen tiap hari? 😌💕</p>
+            <h2>Mau jadi MY MINE selamanya? 💌</h2>
+            <div class="buttons">
+                <button id="yesButton" onclick="showLayer2()">Iya dong 🥺💞</button>
+                <button id="noButton" onmouseover="moveButton()" onclick="moveButton()">Tidak 😜</button>
+            </div>
+        </div>
+
+        <div id="result" class="hidden">
+            <p>YEEEEYYY ❤️🎉 Happy Valentine's Day! Aku sayang kamu 🤍</p>
+            <img src="foto-amaliya.jpeg" alt="Foto Amalia">
+            <img src="bunga.png" id="flower" alt="Buket Bunga">
+            <br>
+            <button style="margin-top:20px; background:#d63384; color:white;" onclick="showLayer3()">Lanjut! ✨</button>
+        </div>
+
+        <div id="layer3" class="hidden">
+            <h1>For U ❤️🌻🌻</h1>
+            <img src="matahari.jpeg" alt="Matahari">
+        </div>
+    </div>
+
+    <script>
+        // LOGIKA JAVASCRIPT LANGSUNG DI SINI
+        function moveButton() {
+            const noButton = document.getElementById('noButton');
+            noButton.style.position = 'fixed'; 
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            noButton.style.left = x + 'px';
+            noButton.style.top = y + 'px';
+        }
+        function showLayer2() {
+            document.getElementById('layer1').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+        }
+        function showLayer3() {
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('layer3').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
