@@ -3,95 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine!</title>
+    <title>Untuk Amalia ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        /* DESAIN CSS LANGSUNG DI SINI */
         body {
-            background-color: #ffc0cb;
-            background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%);
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
+            margin: 0; font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fecfef);
+            background-size: 400% 400%; animation: gradient 10s ease infinite;
+            text-align: center; color: white; min-height: 100vh;
+            display: flex; justify-content: center; align-items: center; overflow-x: hidden;
         }
-        .container { width: 100%; max-width: 400px; color: #d63384; }
-        .hidden { display: none; }
-        .buttons {
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+        @keyframes gradient { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
+        
+        .container { padding: 20px; width: 100%; max-width: 500px; position: relative; z-index: 5; }
+        
+        .hidden { display: none !important; }
+        
+        h1 { font-size: 2.2em; margin-bottom: 10px; text-shadow: 2px 2px rgba(0,0,0,0.1); }
+        p { font-size: 1.1em; line-height: 1.6; }
+
+        /* Tombol Wrapper agar Rapi Bersebelahan */
+        .btn-wrapper { 
+            margin-top: 30px; 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
             position: relative;
-            height: 50px;
+            min-height: 80px;
         }
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
+
+        button { 
+            padding: 15px 30px; border: none; border-radius: 30px; 
+            cursor: pointer; transition: 0.3s; font-weight: 600; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        #yesButton { background-color: #ff4d6d; color: white; }
-        #noButton { background-color: white; color: #ff4d6d; }
-        img {
-            width: 100%;
-            max-width: 250px;
-            border-radius: 15px;
-            border: 5px solid white;
-            margin-top: 15px;
+        
+        .btn-pink { background-color: #ff4d6d; color: white; position: relative; z-index: 10; }
+        .btn-white { background-color: white; color: #ff4d6d; border: 2px solid #ff4d6d; position: relative; z-index: 10; }
+
+        /* Musik Control */
+        .music-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            background: rgba(255, 255, 255, 0.5); color: #ff4d6d;
+            width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; z-index: 9999; border: 2px solid white;
+            cursor: pointer; backdrop-filter: blur(5px);
         }
-        #flower { width: 150px; border: none; }
+
+        .img-style { width: 250px; border-radius: 20px; border: 5px solid white; margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .fade-in { animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
     </style>
 </head>
 <body>
 
+    <button class="music-btn" onclick="playMusic()">🎵</button>
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="The 1975 - About You (Official).mp3" type="audio/mpeg">
+    </audio>
+
     <div class="container">
-        <div id="layer1">
-            <h1>Happy Valentine, AMALIA ULYA ANNURHALENA ❤️</h1>
-            <p>Dari sekian banyak manusia di dunia... kok bisa ya aku dapet yang paling lucu, paling gemesin, tapi juga paling bikin kangen tiap hari? 😌💕</p>
-            <h2>Mau jadi MY MINE selamanya? 💌</h2>
-            <div class="buttons">
-                <button id="yesButton" onclick="showLayer2()">Iya dong 🥺💞</button>
-                <button id="noButton" onmouseover="moveButton()" onclick="moveButton()">Tidak 😜</button>
+        <div id="layer0" class="fade-in">
+            <h1>Valentine's Day ❤️</h1>
+            <p>Halo Amalia Ulya Annurhalena,<br>Klik ikon 🎵 di pojok kanan bawah dulu ya, baru buka pesannya! ✨</p>
+            <button class="btn-pink" onclick="startApp()">Buka Pesan ✨</button>
+        </div>
+
+        <div id="layer1" class="hidden fade-in">
+            <h1>Halo Amalia ❤️</h1>
+            <p>
+                Aku tak pernah tahu dimengerti bisa membuatku merasa aman, sampai aku mengenalmu...<br>
+                Kebersamaanmu indah, perjuanganku tulus,<br>
+                dan aku berharap takdir menuliskan kita berjalan bersama selamanya untuk masa depan yang sama. 🤍😆
+            </p>
+            <h2>May I Be your Boyfriend Forever? 💌</h2>
+            <div class="btn-wrapper">
+                <button id="yesBtn" class="btn-pink" onclick="yesClicked()">Iya dong 😳💖</button>
+                <button id="noBtn" class="btn-white" onmouseover="moveButton()">Tidak 😝</button>
             </div>
         </div>
 
-        <div id="result" class="hidden">
-            <p>YEEEEYYY ❤️🎉 Happy Valentine's Day! Aku sayang kamu 🤍</p>
-            <img src="foto-amaliya.jpeg" alt="Foto Amalia">
-            <img src="bunga.png" id="flower" alt="Buket Bunga">
+        <div id="layer2" class="hidden fade-in">
+            <p style="font-size: 20px; font-weight: bold;">YEEEEYYY ❤️🎉 Sekarang resmi ya!<br>Aku sayang kamu 🤍</p>
+            <img src="foto-amaliya.jpeg" class="img-style" alt="Foto Amalia">
             <br>
-            <button style="margin-top:20px; background:#d63384; color:white;" onclick="showLayer3()">Lanjut! ✨</button>
+            <button class="btn-pink" style="margin-top: 20px;" onclick="showLayer3()">Lanjut! ✨</button>
         </div>
 
-        <div id="layer3" class="hidden">
+        <div id="layer3" class="hidden fade-in">
             <h1>For U ❤️🌻🌻</h1>
-            <img src="matahari.jpeg" alt="Matahari">
+            <img src="matahari.jpeg" class="img-style" alt="Matahari">
+            <p>Stay bright like a sunflower! ☀️</p>
         </div>
     </div>
 
     <script>
-        // LOGIKA JAVASCRIPT LANGSUNG DI SINI
-        function moveButton() {
-            const noButton = document.getElementById('noButton');
-            noButton.style.position = 'fixed'; 
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
-            noButton.style.left = x + 'px';
-            noButton.style.top = y + 'px';
+        const music = document.getElementById("bgMusic");
+
+        function playMusic(){
+            if (music.paused) { 
+                music.play(); 
+                document.querySelector('.music-btn').innerHTML = "⏸️"; 
+            } else { 
+                music.pause(); 
+                document.querySelector('.music-btn').innerHTML = "🎵"; 
+            }
         }
-        function showLayer2() {
-            document.getElementById('layer1').classList.add('hidden');
-            document.getElementById('result').classList.remove('hidden');
+
+        function startApp() {
+            music.play().catch(() => console.log("Lagu akan diputar via tombol manual"));
+            document.getElementById("layer0").classList.add("hidden");
+            document.getElementById("layer1").classList.remove("hidden");
         }
+
+        function yesClicked() {
+            document.getElementById("layer1").classList.add("hidden");
+            document.getElementById("layer2").classList.remove("hidden");
+            confetti();
+        }
+
         function showLayer3() {
-            document.getElementById('result').classList.add('hidden');
-            document.getElementById('layer3').classList.remove('hidden');
+            document.getElementById("layer2").classList.add("hidden");
+            document.getElementById("layer3").classList.remove("hidden");
         }
+
+        function moveButton() {
+            const btn = document.getElementById("noBtn");
+            btn.style.position = "fixed"; 
+            
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.left = x + "px";
+            btn.style.top = y + "px";
+        }
+
+        function confetti(){
+            for(let i=0;i<60;i++){
+                let el = document.createElement("div");
+                el.innerHTML = "❤️";
+                el.style.position="fixed";
+                el.style.left=Math.random()*100+"vw";
+                el.style.top="-10px";
+                el.style.zIndex="999";
+                el.style.animation="fall 3s linear forwards";
+                document.body.appendChild(el);
+                setTimeout(()=>el.remove(),3000);
+            }
+        }
+        
+        const style = document.createElement("style");
+        style.innerHTML = `@keyframes fall { to {transform: translateY(100vh); opacity:0;} }`;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
